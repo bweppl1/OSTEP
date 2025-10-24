@@ -5,6 +5,7 @@
 #include <sched.h>
 #include <string.h>
 
+// results of this test approx ~0.000005 seconds per context switch
 
 int main() {
 	// simulate single processor setup to test process speed of operations: context switching, piping between parent/child
@@ -44,7 +45,8 @@ int main() {
 			// if (bytes_p1 > 0) {
 			// 	buff[bytes_p1] = '\0';
 			// 	printf("process 1 received: %s\n", buff);
-			// }
+			// } 
+			//  REMOVED FOR TRUE SPEED
 		}
 		close(fd_one[1]);
 		close(fd_two[0]);
@@ -67,14 +69,19 @@ int main() {
 			// 	buf[bytes] = '\0'; // clear buffer
 			// 	printf("process 2 received: %s\n", buf);
 			// }
+			// REMOVED FOR TRUE SPEED
 		}
 		close(fd_one[0]);
 		close(fd_two[1]);
 	}
-
+	
+	// get end timer
 	gettimeofday(&end, NULL);
 
+	// total time to run program
 	double context_switch_timer = ((end.tv_sec - start.tv_sec) + (end.tv_usec - start.tv_usec) / 1000000.0);
+	
+	// average time per # of loops (context switch is done 2x per loop)
 	double seconds_per_switch = context_switch_timer / (process_count * 2);
 
 	printf("Seconds per context switch: %.6f\n", seconds_per_switch);

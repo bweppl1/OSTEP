@@ -13,4 +13,3 @@ int main() {
 		printf("parent\n");
 	}
 }
-ksd
