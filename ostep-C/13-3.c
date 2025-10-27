@@ -34,7 +34,8 @@ int main() {
 		free(ptr);
 		return 1;
 	}
-
+	
+	printf("PID: %d\n", getpid());
 	sleep(sleep_time);
 
 	// end program
